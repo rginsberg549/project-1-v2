@@ -60,7 +60,7 @@ function getIncomeStatement() {
             }
             incomeStatementArray.push(data);
         }
-        console.log(incomeStatementArray)
+        console.log(incomeStatementArray.slice(0,5))
     });
 }
 
@@ -75,7 +75,7 @@ function getCashFlow() {
             }
             cashFlowArray.push(data)  
         }
-        console.log(cashFlowArray)
+        console.log(cashFlowArray.slice(0,5))
     });
 }
 
@@ -91,7 +91,7 @@ function getBalanceSheet() {
             balanceSheetArray.push(data);
         }
 
-        console.log(balanceSheetArray);
+        console.log(balanceSheetArray.slice(0,5));
     }); 
 }
 
@@ -107,7 +107,7 @@ function getCompanyProfile() {
             }
             companyProfileArray.push(data);
         }
-        console.log(companyProfileArray);
+        console.log(companyProfileArray.slice(0,5));
     });
 }
 
