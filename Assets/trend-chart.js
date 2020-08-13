@@ -1,5 +1,8 @@
 
 
+
+////// button related to chart ///////
+
 var countdown = 0
 
 $("button").click(function (e) {
@@ -39,15 +42,13 @@ $("button").click(function (e) {
   }, 1000)
   }
 
+
+/// function that starts it all ///
+
 function bigFunction(userInput){
-
-console.log(userInput)
-
 
 apiKey = "ZY0GHO5HP0KA7RXS"
 queryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${userInput}&apikey=${apiKey}`
-
-    
 
         var stockLabels = []
         var stockPrices8 = []
@@ -56,6 +57,9 @@ queryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=
 
         var stockRealPrice = []
         
+
+
+    ///// measures the trend //////    
         
             function measureMe(){
                     
@@ -108,7 +112,7 @@ queryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=
              }
 
 
-             
+    //////// API requests //////////         
 
         function otherData() {
             $.ajax({
@@ -128,8 +132,10 @@ queryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=
                 },
             })
             
+           
+       //////// calculates the 8ma and 21ma////////  
+           
             setTimeout(function() {
-            
             
             for (i = 0; i > -30; i--) {
             var currentInt = 50 + i
@@ -176,10 +182,9 @@ queryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=
 
 
 
+/////// makes the chart ////////
 
-
-             
-
+  
 function makeChart(stockLabels, stockPrices8, stockPrices21, stockRealPriceBucket) {
    
 
