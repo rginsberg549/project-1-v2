@@ -8,36 +8,36 @@ var countdown = 0
 $("button").click(function (e) {
     e.preventDefault()
 
-
-        if (countdown == 0) {
+        if (countdown < 4) {
         
         stockInput = $("#stockInput").val()
         var userInput = stockInput
         bigFunction(userInput)
-        $("button").prop("disabled", true)
-        $("#stockInput").prop("disabled", true)
-        count()
-
+        
             setTimeout(function() {
-                $("button").prop("disabled", false) 
-                $("#stockInput").prop("disabled", false)
             return countdown--
-            }, 60000)
+            }, 18000)
 
         return countdown++
         
-        } 
+        } else {
+            $("button").prop("disabled", true)
+            $("#stockInput").prop("disabled", true)
+            count()
+        }
      
   })
     
   function count() {
-  var count = 60
+  var count = 20
   timer = setInterval(function () {
-      $("#time-remaining").html("must wait: " + count).slice(-2)
+      $("#time-remaining").html("slow down... please wait: " + count).slice(-2)
       count--;
       if (count < 0) {
           clearInterval(timer);
           $("#time-remaining").text(" ")
+          $("button").prop("disabled", false) 
+          $("#stockInput").prop("disabled", false)
       }
   }, 1000)
   }
@@ -135,7 +135,7 @@ queryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=
            
        //////// calculates the 8ma and 21ma////////  
            
-            setTimeout(function() {
+        setTimeout(function() {
             
             for (i = 0; i > -30; i--) {
             var currentInt = 50 + i
