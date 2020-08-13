@@ -229,7 +229,7 @@ function bigFunction(userInput){
                     },
                 });
             
-        }, 1500)
+        }, 2500)
         
     }
 
