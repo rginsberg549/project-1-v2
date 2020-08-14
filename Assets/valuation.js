@@ -1,6 +1,6 @@
+// export function calValuation(stockSymbol) {
 
-
-var stockSymbol = "AAPL"
+// var stockSymbol = "AAPL"
 var apikey = "48e7fd131027143a2fc901de569ad2ce"
 
 var globalDataObj = [];
@@ -157,3 +157,4 @@ function renderCompanyValuation() {
 
 renderCompanyValuation()
 
+// }

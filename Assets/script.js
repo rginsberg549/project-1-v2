@@ -1,4 +1,5 @@
 import { bigFunction } from "./trend-chart.js"
+// import { calValuation } from "./valuation.js"
 
     var countdown = 0
 
@@ -11,6 +12,7 @@ $("button").click(function (e) {
         var userInput = stockInput
        
         bigFunction(userInput)
+        // calValuation(userInput)
         
             setTimeout(function() {
             return countdown--
