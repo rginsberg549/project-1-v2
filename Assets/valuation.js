@@ -1,14 +1,32 @@
-var stockSymbol = "AAPL";
+var stockSymbol = "MSFT";
+var apikey = "c08946528f1aa8ab38e951cb961b2d08"
 
-var incomeStatementArray = [];
-var balanceSheetArray = [];
-var cashFlowArray = [];
-var companyProfileArray = [];
+var globalDataObj = [];
+var companyProfileObj = {};
+
+var companyProfileElement = $("valuation");
+var companyImageElement = $(".company-image");
+var companyNameElement = $(".company-name");
+var ceoNameElement = $(".ceo-name");
+var industryElement = $(".industry");
+var currentPriceElement = $(".current-price");
+
+var dateElement = $(".date");
+var epsElement = $(".eps");
+var grossProfitRatioElement = $(".gross-profit-ratio");
+var netIncomeRatioElement = $(".net-income-ratio");
+var totalAssetsElement = $(".total-assets");
+var totalDebtElement = $(".total-debt");
+
+var formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
 
 var incomeStatementSettings = {
 	"async": true,
 	"crossDomain": true,
-	"url": "https://financial-modeling-prep.p.rapidapi.com/income-statement/" + stockSymbol + "?apikey=demo",
+	"url": "https://financial-modeling-prep.p.rapidapi.com/income-statement/" + stockSymbol + "?apikey=" + apikey,
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "financial-modeling-prep.p.rapidapi.com",
@@ -19,7 +37,7 @@ var incomeStatementSettings = {
 var cashFlowSettings = {
 	"async": true,
 	"crossDomain": true,
-	"url": "https://financial-modeling-prep.p.rapidapi.com/cash-flow-statement/" + stockSymbol + "?apikey=demo",
+	"url": "https://financial-modeling-prep.p.rapidapi.com/cash-flow-statement/" + stockSymbol + "?apikey=" + apikey,
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "financial-modeling-prep.p.rapidapi.com",
@@ -30,7 +48,7 @@ var cashFlowSettings = {
 var balanceSheetSettings = {
 	"async": true,
 	"crossDomain": true,
-	"url": "https://financial-modeling-prep.p.rapidapi.com/balance-sheet-statement/" + stockSymbol + "?apikey=demo",
+	"url": "https://financial-modeling-prep.p.rapidapi.com/balance-sheet-statement/" + stockSymbol + "?apikey=" + apikey,
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "financial-modeling-prep.p.rapidapi.com",
@@ -41,7 +59,7 @@ var balanceSheetSettings = {
 var companyProfileSettings = {
 	"async": true,
 	"crossDomain": true,
-	"url": "https://financial-modeling-prep.p.rapidapi.com/profile/" + stockSymbol  + "?apikey=demo",
+	"url": "https://financial-modeling-prep.p.rapidapi.com/profile/" + stockSymbol  + "?apikey=" + apikey,
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "financial-modeling-prep.p.rapidapi.com",
@@ -52,66 +70,85 @@ var companyProfileSettings = {
 function getIncomeStatement() {
     $.ajax(incomeStatementSettings).done(function (response) {
         for (let index = 0; index < response.length; index++) {
-            data = {
-                "date" : response[index].date,
+            globalDataObj[response[index].date] = {
+                ...globalDataObj[response[index].date],
                 "eps" : response[index].eps,
-                "gross profit ratio" : response[index].grossProfitRatio,
-                "net income ratio" : response[index].netIncomeRatio
+                "grossProfitRatio" : response[index].grossProfitRatio,
+                "netIncomeRatio" : response[index].netIncomeRatio
             }
-            incomeStatementArray.push(data);
         }
-        console.log(incomeStatementArray.slice(0,5))
     });
 }
 
 function getCashFlow() {
     $.ajax(cashFlowSettings).done(function (response) {
         for (let index = 0; index < response.length; index++) {
-            data = {
-                "date" : response[index].date,
+            globalDataObj[response[index].date] = {
+                ...globalDataObj[response[index].date],
                 "netCashProvidedByOperatingActivities" : response[index].netCashProvidedByOperatingActivities,
                 "operatingCashFlow" : response[index].operatingCashFlow,
                 "freeCashFlow" : response[index].freeCashFlow
             }
-            cashFlowArray.push(data)  
         }
-        console.log(cashFlowArray.slice(0,5))
     });
 }
 
 function getBalanceSheet() {
     $.ajax(balanceSheetSettings).done(function (response) {
         for (let index = 0; index < response.length; index++) {
-            data = {
-                "date" : response[index].date,
+
+            globalDataObj[response[index].date] = {
+                ...globalDataObj[response[index].date],
                 "totalAssets" : response[index].totalAssets,
                 "totalDebt" : response[index].totalDebt
             }
-
-            balanceSheetArray.push(data);
         }
-
-        console.log(balanceSheetArray.slice(0,5));
     }); 
 }
 
 function getCompanyProfile() {
     $.ajax(companyProfileSettings).done(function (response) {
         for (let index = 0; index < response.length; index++) {
-            data = {
+            companyProfileObj = {
+                ...companyProfileObj[response[index]],
                 "companyName" : response[index].companyName,
                 "ceo" : response[index].ceo,
                 "image" : response[index].image,
                 "industry" : response[index].industry,
                 "price" : response[index].price
             }
-            companyProfileArray.push(data);
         }
-        console.log(companyProfileArray.slice(0,5));
+        renderCompanyProfile();
     });
 }
 
-getBalanceSheet();
-getCashFlow();
-getCompanyProfile();
-getIncomeStatement();
+
+function renderCompanyProfile() {
+    
+}
+
+function renderCompanyValuation() {
+    getBalanceSheet();
+    getCashFlow();
+    getCompanyProfile();
+    getIncomeStatement();
+
+    setTimeout(function() {
+        var tempDate = Object.keys(globalDataObj)[0];
+        companyImageElement.attr("src", companyProfileObj.image);
+        companyNameElement.text("Comany Name: " + companyProfileObj.companyName);
+        ceoNameElement.text("CEO: " + companyProfileObj.ceo);
+        industryElement.text("Industry: " + companyProfileObj.industry);
+        currentPriceElement.text("Share Price (Now): " + companyProfileObj.price);
+        dateElement.text("Reprted on: " + tempDate);
+        epsElement.text("Earnings Per Share: " + globalDataObj[tempDate].eps);
+        grossProfitRatioElement.text("Gross Profit Ratio: " + (globalDataObj[tempDate].grossProfitRatio * 100).toFixed(2) + "%")
+        netIncomeRatioElement.text("Net Income Ratio: " + (globalDataObj[tempDate].netIncomeRatio *100).toFixed(2) + "%")
+        totalAssetsElement.text("Total Assets: " + formatter.format(globalDataObj[tempDate].totalAssets));
+        totalDebtElement.text("Total Debt: " + formatter.format(globalDataObj[tempDate].totalDebt));
+    }, 2000);
+}
+
+renderCompanyValuation()
+
+
