@@ -139,9 +139,7 @@ function getCompanyProfile() {
 }
 
 
-function renderCompanyValuation(event) {
-    event.preventDefault();
-
+function renderCompanyValuation() {
     getIncomeStatement();
     getBalanceSheet();
     getCashFlow();

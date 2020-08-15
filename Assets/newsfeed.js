@@ -6,8 +6,6 @@ function getArticleSearchSettings(q) {
     console.log("1: " + q);
     var query = "&q=" + q
     console.log("query value: " + query);
-    // var beginDate = "begin_date=20190801"
-    // var endDate = "&end_date=20200813"
     
     var articleSearchSettings = {
         "url": "https://api.nytimes.com/svc/search/v2/articlesearch.json?" + query + nytAPIKey,
@@ -18,12 +16,16 @@ function getArticleSearchSettings(q) {
     return articleSearchSettings
 }
 
+function clearCompanyArticles() {
+    companyArticlesElement.empty();
+}
+
 function getCompanyArticles(q) {
-    console.log("2" + q);
     $.ajax(getArticleSearchSettings(q)).done(function(response) {
         var articleData = (response.response.docs)
         setTimeout(function() {
-            for (let index = 0; index < articleData.length; index++) {
+            companyArticlesElement.empty();
+;            for (let index = 0; index < articleData.length; index++) {
                 var articleDiv = $("<div>");
                 
                 var cardImgDiv = $("<div>");
