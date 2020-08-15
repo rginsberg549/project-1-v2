@@ -1,5 +1,5 @@
-var stockSymbol = "MSFT";
-var apikey = "c08946528f1aa8ab38e951cb961b2d08"
+var stockSymbol = "AAPL";
+var apikey = "demo"
 
 var globalDataObj = [];
 var companyProfileObj = {};
