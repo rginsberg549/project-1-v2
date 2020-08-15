@@ -52,12 +52,11 @@ function createSearchHistoryButtonFromStorage(data) {
     searchHistoryArray.push(btnValue);
     localStorage.setItem("search-history", searchHistoryArray);
 
-    var li = $("<li>");
-
-    var btn = $("<a>");
+    var btn = $("<button>");
     btn.attr("class", "m-1 search-history-button");
     btn.attr("id", "search-history-btn-" + searchHistoryId);
     btn.attr("value", btnValue);
+    btn.attr("data-value", btnValue);
     btn.text(btnValue);
 
     var metaSpan = $("<span>");
@@ -79,10 +78,11 @@ function createSearchHistoryButtonFromStorage(data) {
 
 
 function getSearchHistoryButtonValue() {
+    console.log($(this));
+
     var historyButtonValue = $(this).val();
     inputElement.val(historyButtonValue);
-    renderCompanyValuation(this)
-
+    renderCompanyValuation()
 }
 
 function removeSearchHistoryButton() {
