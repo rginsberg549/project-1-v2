@@ -1,26 +1,27 @@
-var stockSymbol = "AAPL"
-var companyName = "Apple Inc."
-
+var nytAPIKey = "&api-key=iabwIkv6ykHl3BTclLtwozsw8QZXDrxl";
 var companyArticlesElement = $(".company-articles");
 
 
-var endpointURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?"
-var nytAPIKey = "&api-key=iabwIkv6ykHl3BTclLtwozsw8QZXDrxl";
-var query = "&q=" + companyName
-var beginDate = "begin_date=20200801"
-var endDate = "&end_date=20200813"
+function getArticleSearchSettings(q) {
+    console.log("1: " + q);
+    var query = "&q=" + q
+    console.log("query value: " + query);
+    // var beginDate = "begin_date=20190801"
+    // var endDate = "&end_date=20200813"
+    
+    var articleSearchSettings = {
+        "url": "https://api.nytimes.com/svc/search/v2/articlesearch.json?" + query + nytAPIKey,
+        "method": "GET",
+    }
 
-console.log(endpointURL + beginDate + endDate + query + nytAPIKey);
-
-var articleSearchSettings = {
-	"url": (endpointURL + beginDate + endDate + query + nytAPIKey),
-	"method": "GET",
+    console.log("Article Search Settings: " + articleSearchSettings);
+    return articleSearchSettings
 }
 
-function getCompanyArticles() {
-    $.ajax(articleSearchSettings).done(function(response) {
+function getCompanyArticles(q) {
+    console.log("2" + q);
+    $.ajax(getArticleSearchSettings(q)).done(function(response) {
         var articleData = (response.response.docs)
-        console.log(articleData);
         setTimeout(function() {
             for (let index = 0; index < articleData.length; index++) {
                 var articleDiv = $("<div>");
@@ -45,8 +46,6 @@ function getCompanyArticles() {
                     articleImage.attr("src", "");
                     cardImgDiv.append(articleImage);
             }
-                console.log(articleData[index].multimedia)
-
                 articleDiv.append([cardImgDiv, articleLink]);
                 companyArticlesElement.append(articleDiv);
             }
@@ -54,7 +53,7 @@ function getCompanyArticles() {
     });
 }
 
-getCompanyArticles()
+
 
 
 

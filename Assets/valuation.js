@@ -1,8 +1,10 @@
-var stockSymbol = "AAPL";
-var apikey = "demo"
+var rapidAPIkey = "c08946528f1aa8ab38e951cb961b2d08";
 
 var globalDataObj = [];
 var companyProfileObj = {};
+
+var input = $("#stockInput");
+var submit = $("#submit");
 
 var companyProfileElement = $("valuation");
 var companyImageElement = $(".company-image");
@@ -13,6 +15,7 @@ var currentPriceElement = $(".current-price");
 
 var dateElement = $(".date");
 var epsElement = $(".eps");
+var dividentElement = $(".dividends");
 var grossProfitRatioElement = $(".gross-profit-ratio");
 var netIncomeRatioElement = $(".net-income-ratio");
 var totalAssetsElement = $(".total-assets");
@@ -23,52 +26,22 @@ var formatter = new Intl.NumberFormat('en-US', {
     currency: 'USD',
   });
 
-var incomeStatementSettings = {
-	"async": true,
-	"crossDomain": true,
-	"url": "https://financial-modeling-prep.p.rapidapi.com/income-statement/" + stockSymbol + "?apikey=" + apikey,
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "financial-modeling-prep.p.rapidapi.com",
-		"x-rapidapi-key": "c23481d564msh4d48ca2d97c6375p1be85ejsna769421f074b"
-	}
-}
-
-var cashFlowSettings = {
-	"async": true,
-	"crossDomain": true,
-	"url": "https://financial-modeling-prep.p.rapidapi.com/cash-flow-statement/" + stockSymbol + "?apikey=" + apikey,
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "financial-modeling-prep.p.rapidapi.com",
-		"x-rapidapi-key": "c23481d564msh4d48ca2d97c6375p1be85ejsna769421f074b"
-	}
-}
-
-var balanceSheetSettings = {
-	"async": true,
-	"crossDomain": true,
-	"url": "https://financial-modeling-prep.p.rapidapi.com/balance-sheet-statement/" + stockSymbol + "?apikey=" + apikey,
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "financial-modeling-prep.p.rapidapi.com",
-		"x-rapidapi-key": "c23481d564msh4d48ca2d97c6375p1be85ejsna769421f074b"
-	}
-}
-
-var companyProfileSettings = {
-	"async": true,
-	"crossDomain": true,
-	"url": "https://financial-modeling-prep.p.rapidapi.com/profile/" + stockSymbol  + "?apikey=" + apikey,
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "financial-modeling-prep.p.rapidapi.com",
-		"x-rapidapi-key": "c23481d564msh4d48ca2d97c6375p1be85ejsna769421f074b"
-	}
+function getIncomeStatementSettings() {
+    var incomeStatementSettings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://financial-modeling-prep.p.rapidapi.com/income-statement/" + getStockSymbol() + "?apikey=" + rapidAPIkey,
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "financial-modeling-prep.p.rapidapi.com",
+            "x-rapidapi-key": "c23481d564msh4d48ca2d97c6375p1be85ejsna769421f074b"
+        }
+    }
+    return incomeStatementSettings
 }
 
 function getIncomeStatement() {
-    $.ajax(incomeStatementSettings).done(function (response) {
+    $.ajax(getIncomeStatementSettings()).done(function (response) {
         for (let index = 0; index < response.length; index++) {
             globalDataObj[response[index].date] = {
                 ...globalDataObj[response[index].date],
@@ -80,8 +53,22 @@ function getIncomeStatement() {
     });
 }
 
+function getCashFlowSettings() {
+    var cashFlowSettings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://financial-modeling-prep.p.rapidapi.com/cash-flow-statement/" + getStockSymbol() + "?apikey=" + rapidAPIkey,
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "financial-modeling-prep.p.rapidapi.com",
+            "x-rapidapi-key": "c23481d564msh4d48ca2d97c6375p1be85ejsna769421f074b"
+        }
+    }
+    return cashFlowSettings;
+}
+
 function getCashFlow() {
-    $.ajax(cashFlowSettings).done(function (response) {
+    $.ajax(getCashFlowSettings()).done(function (response) {
         for (let index = 0; index < response.length; index++) {
             globalDataObj[response[index].date] = {
                 ...globalDataObj[response[index].date],
@@ -93,8 +80,22 @@ function getCashFlow() {
     });
 }
 
+function getBalanceSheetSettings() {
+    var balanceSheetSettings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://financial-modeling-prep.p.rapidapi.com/balance-sheet-statement/" + getStockSymbol() + "?apikey=" + rapidAPIkey,
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "financial-modeling-prep.p.rapidapi.com",
+            "x-rapidapi-key": "c23481d564msh4d48ca2d97c6375p1be85ejsna769421f074b"
+        }
+    }
+    return balanceSheetSettings
+}
+
 function getBalanceSheet() {
-    $.ajax(balanceSheetSettings).done(function (response) {
+    $.ajax(getBalanceSheetSettings()).done(function (response) {
         for (let index = 0; index < response.length; index++) {
 
             globalDataObj[response[index].date] = {
@@ -106,8 +107,23 @@ function getBalanceSheet() {
     }); 
 }
 
+function getCompanyProfileSettings() {
+    var companyProfileSettings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://financial-modeling-prep.p.rapidapi.com/profile/" + getStockSymbol()  + "?apikey=" + rapidAPIkey,
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "financial-modeling-prep.p.rapidapi.com",
+            "x-rapidapi-key": "c23481d564msh4d48ca2d97c6375p1be85ejsna769421f074b"
+        }
+    }
+    return companyProfileSettings
+}
+
 function getCompanyProfile() {
-    $.ajax(companyProfileSettings).done(function (response) {
+    $.ajax(getCompanyProfileSettings()).done(function (response) {
+
         for (let index = 0; index < response.length; index++) {
             companyProfileObj = {
                 ...companyProfileObj[response[index]],
@@ -115,33 +131,35 @@ function getCompanyProfile() {
                 "ceo" : response[index].ceo,
                 "image" : response[index].image,
                 "industry" : response[index].industry,
-                "price" : response[index].price
+                "price" : response[index].price,
+                "dividend" : response[index].lastDiv
             }
         }
-        renderCompanyProfile();
     });
 }
 
 
-function renderCompanyProfile() {
-    
-}
+function renderCompanyValuation(event) {
+    event.preventDefault();
 
-function renderCompanyValuation() {
+    getIncomeStatement();
     getBalanceSheet();
     getCashFlow();
     getCompanyProfile();
-    getIncomeStatement();
+    
+
 
     setTimeout(function() {
         var tempDate = Object.keys(globalDataObj)[0];
         companyImageElement.attr("src", companyProfileObj.image);
         companyNameElement.text("Comany Name: " + companyProfileObj.companyName);
+        getCompanyArticles(companyProfileObj.companyName);
         ceoNameElement.text("CEO: " + companyProfileObj.ceo);
         industryElement.text("Industry: " + companyProfileObj.industry);
         currentPriceElement.text("Share Price (Now): " + companyProfileObj.price);
         dateElement.text("Reprted on: " + tempDate);
-        epsElement.text("Earnings Per Share: " + globalDataObj[tempDate].eps);
+        epsElement.text("Earnings Per Share: " + (globalDataObj[tempDate].eps).toFixed(2));
+        dividentElement.text("Dividends: " + (companyProfileObj.dividend).toFixed(2));
         grossProfitRatioElement.text("Gross Profit Ratio: " + (globalDataObj[tempDate].grossProfitRatio * 100).toFixed(2) + "%")
         netIncomeRatioElement.text("Net Income Ratio: " + (globalDataObj[tempDate].netIncomeRatio *100).toFixed(2) + "%")
         totalAssetsElement.text("Total Assets: " + formatter.format(globalDataObj[tempDate].totalAssets));
@@ -149,6 +167,10 @@ function renderCompanyValuation() {
     }, 2000);
 }
 
-renderCompanyValuation()
+function getStockSymbol() {
+    var input = $("#stockInput").val();
+    return input;
+}
 
+submit.on("click", renderCompanyValuation);
 
