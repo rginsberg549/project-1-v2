@@ -60,6 +60,7 @@ function createSearchHistoryButtonFromStorage(data) {
     btn.attr("id", "search-history-btn-" + searchHistoryId);
     btn.addClass("uk-button uk-button-default")
     btn.attr("value", btnValue);
+    btn.attr("data-value", btnValue);
     btn.text(btnValue);
 
     var metaSpan = $("<span>");
@@ -81,10 +82,11 @@ function createSearchHistoryButtonFromStorage(data) {
 
 
 function getSearchHistoryButtonValue() {
+    console.log($(this));
+
     var historyButtonValue = $(this).val();
     inputElement.val(historyButtonValue);
-    renderCompanyValuation(this)
-
+    renderCompanyValuation()
 }
 
 function removeSearchHistoryButton() {
