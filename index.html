@@ -11,8 +11,12 @@
 </head>
 
 <body>
-    <div class="uk-navbar-container uk-background-default" uk-navbar>
+   
+
+    <div class="uk-background-default">
         
+        <div class="wrapper-wrap uk-navbar-container" uk-navbar>
+
             <div class="uk-navbar-left uk-padding-small" id="nav-left">
             
                 <div id="nav-brand" class=".uk-text-emphasis">Quick Trends</div>
@@ -23,11 +27,11 @@
                     <input class="uk-search-default" type="text" id="stockInput" minlength="3" maxlength="4">
                     <button class="uk-button uk-button-default" id="submit" type="submit">Search</button>
                 </div>
-            
+            </div>
     </div>
 
     </div>
-    <div class="uk-text-small uk-text-muted" id="search-history-div">
+    <div class="uk-text-small uk-text-muted wrapper-wrap" id="search-history-div">
 
         <span id="search-history-text">Recent search history:</span>
         <div id="button-wrapper">
@@ -36,7 +40,7 @@
     </div>
 
     
-    <div id="big-container" class="uk-background-muted">
+    <div id="big-container" class="uk-background-muted wrapper-wrap">
       <div id="clean-wrapper">
         <div id="trend-text-div">
             <span id="trend-text"></span>
@@ -103,10 +107,10 @@
 
     </div>
     </div>
-
+    <div class="wrapper-wrap">
     <div class="uk-text-muted uk-text-small" id="headline-text">Recent news:</div>
-    <br>
-    <div id="article-wrapper" class="uk-background-muted">
+    <br></div>
+    <div id="article-wrapper" class="uk-background-muted wrapper-wrap">
         <div id="article-box">
         <div class="company-articles uk-flex uk-flex-wrap uk-flex-center">
            

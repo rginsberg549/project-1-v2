@@ -51,6 +51,7 @@ table {
 	text-align: center;
 	height: 600px;
 	
+	
 }
 
 #contain-it {
@@ -71,8 +72,7 @@ table {
 
 #side-by-side {
 	display: flex;
-	flex-flow: row wrap;
-	
+	flex-flow: row;	
 }
 
 #nav-left {
@@ -85,10 +85,11 @@ table {
 #value-card {
 	height: 100%;
 	text-align: left;
-	margin-right: auto;
+	/* margin-right: auto; */
 	width: 300px;
-	padding: 40px;
+	/* padding: 40px; */
 	padding-top: 0px;
+	margin: auto;
 }
 
 
@@ -201,6 +202,15 @@ th, td {
 	background-color: rgb(245, 243, 243);
 }
 
+.wrapper-wrap {
+	max-width: 1000px;
+	margin: auto;
+}
+
+/* .wrapper-top {
+	margin: auto;
+} */
+
 @media (max-width: 600px) {
 	#contain-it {
 		height: 400px;
@@ -253,5 +263,8 @@ th, td {
 		align-content: center;
 	}
 	
+	#side-by-side {
+		flex-flow: column;	
+	}
 	
 }
