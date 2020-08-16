@@ -1,45 +1,47 @@
 
+/// button feature ///
 
 var countdown = 0
 
-$("button").click(function (e) {
-    e.preventDefault()
-
-
-        if (countdown == 0) {
-        
-        stockInput = $("#stockInput").val()
-        var userInput = stockInput
-        bigFunction(userInput)
-        $("button").prop("disabled", true)
-        $("#stockInput").prop("disabled", true)
-        count()
-
-            setTimeout(function() {
-                $("button").prop("disabled", false) 
-                $("#stockInput").prop("disabled", false)
-            return countdown--
-            }, 60000)
-
-        return countdown++
-        
-        } 
-     
-  })
+    $("button").click(function (e) {
+        e.preventDefault()
     
-  function count() {
-  var count = 60
-  timer = setInterval(function () {
-      $("#time-remaining").html("must wait: " + count).slice(-2)
-      count--;
-      if (count < 0) {
-          clearInterval(timer);
-          $("#time-remaining").text(" ")
+            if (countdown < 4) {
+            
+            var stockInput = $("#stockInput").val()
+            var userInput = stockInput
+           
+            bigFunction(userInput)
+          
+             setTimeout(function() {
+                return countdown--
+                }, 18000)
+    
+            return countdown++
+            
+            } else {
+                $("button").prop("disabled", true)
+                $("#stockInput").prop("disabled", true)
+                count()
+            }
+         
+      })
+        
+      function count() {
+      var count = 20
+      timer = setInterval(function () {
+          $("#time-remaining").html("slow down... please wait: " + count).slice(-2)
+          count--;
+          if (count < 0) {
+              clearInterval(timer);
+              $("#time-remaining").text(" ")
+              $("button").prop("disabled", false) 
+              $("#stockInput").prop("disabled", false)
+          }
+      }, 1000)
       }
-  }, 1000)
-  }
 
-function bigFunction(userInput){
+function bigFunction(userInput) {
 
 console.log(userInput)
 
@@ -61,13 +63,10 @@ queryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=
                     
                     setTimeout (function(){
                     
-                    
                         checkUptrend()
-                        
-                            
+
                             function checkUptrend (){
-                                console.log("test uptrend")
-                                    for (i = 18; i < 31; i++) {
+                                    for (var i = 23; i < 31; i++) {
                                         
                                         if (stockPrices8[i] < stockPrices21[i]) {
                                             checkdownTrend()
@@ -85,10 +84,9 @@ queryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=
                             }
 
                             function checkdownTrend (){
-                                    console.log("test downtrend")
-                                    for (i = 18; i < 31; i++) {
+                                    for (var i = 23; i < 31; i++) {
                                         if (stockPrices8[i] > stockPrices21[i]) {
-                                            $("#trend-text").text("None Detected")
+                                            $("#trend-text").text("No Trend Detected")
                                             $("#trend-text").css({color: "black"})
                                             break;
                                         } else {
@@ -102,10 +100,8 @@ queryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=
                                     $("#trend-text").css({color: "red"})
                                 }
 
-                    
                     }, 3000)
-                    
-             }
+            }
 
 
              
@@ -233,7 +229,61 @@ function makeChart(stockLabels, stockPrices8, stockPrices21, stockRealPriceBucke
 
 }
 
+  
+    function makeChart(stockLabels, stockPrices8, stockPrices21, stockRealPriceBucket) {
+        
+        $("#stock-chart").remove()
+        $("#contain-it").append(`<canvas id="stock-chart"></canvas>`)
 
+        setTimeout (function() {
+        
+                var ctx = document.getElementById('stock-chart').getContext('2d');    
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: stockLabels,
+                        datasets: [{
+                            label: "8 MA",
+                            data: stockPrices8,
+                            borderColor: 'blue',
+                            borderWidth: 1
+                        },{
+                            label: "21 MA",
+                            data: stockPrices21,
+                            borderColor: "green",
+                            borderWidth: 1,
+                            
+                        }, {
+                            label: "Stock Price",
+                            data: stockRealPriceBucket,
+                            borderColor: "yellow",
+                            borderWidth: 1,
+                        }]
+                    },
+                    options: {
+                        title: {
+                            display: true,
+                            text: userInput.toUpperCase(),
+                            fontSize: 32,
+                        },
+                        legend: {
+                            position: "bottom",
+                        },
+                        
+                        scales: {
+                            yAxes: [{
+                                gridLines: {
+                                    display: false
+                                }
+                            }]
+                        },
+                        maintainAspectRatio: false
+                    },
+                });
+            
+        }, 3000)
+        
+    }
 
 otherData();
 
