@@ -43,17 +43,21 @@ var countdown = 0
 
 function bigFunction(userInput) {
 
-   // buckets //   
+console.log(userInput)
 
-    var apiKey = "ZY0GHO5HP0KA7RXS"
-    var queryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${userInput}&apikey=${apiKey}`
-    var stockLabels = []
-    var stockPrices8 = []
-    var stockPrices21 = []
-    var stockRealPriceBucket = []
-    var stockRealPrice = []
+
+apiKey = "ZY0GHO5HP0KA7RXS"
+queryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${userInput}&apikey=${apiKey}`
+
+    
+
+        var stockLabels = []
+        var stockPrices8 = []
+        var stockPrices21 = []
+        var stockRealPriceBucket = []
+
+        var stockRealPrice = []
         
-            ///// measures the trend //////    
         
             function measureMe(){
                     
@@ -100,7 +104,7 @@ function bigFunction(userInput) {
             }
 
 
-        //////// API requests //////////         
+             
 
         function otherData() {
             $.ajax({
@@ -108,11 +112,11 @@ function bigFunction(userInput) {
                 method: "GET",
                 success: function(response){
                     var convertSeriesObj = Object.entries(response["Time Series (Daily)"])
-                    for (var i = 0; i < 50; i++) {
+                    for (i = 0; i < 50; i++) {
                          stockRealPrice.unshift(convertSeriesObj[i][1]["1. open"])
                          
                              }
-                    for (var i = 0; i < 30; i++) {
+                    for (i = 0; i < 30; i++) {
                         stockRealPriceBucket.unshift(convertSeriesObj[i][1]["1. open"])
                 
                         stockLabels.unshift(convertSeriesObj[i][0])
@@ -120,12 +124,10 @@ function bigFunction(userInput) {
                 },
             })
             
-           
-        //////// calculates the 8ma and 21ma////////  
-           
-        setTimeout(function() {
+            setTimeout(function() {
             
-            for (var i = 0; i > -30; i--) {
+            
+            for (i = 0; i > -30; i--) {
             var currentInt = 50 + i
             var ArrStartNum = currentInt - 21
             var divider = 1
@@ -142,7 +144,7 @@ function bigFunction(userInput) {
                 stockPrices21.unshift(divideIt.toFixed(2))
             }
             
-            for (var i = 0; i > -30; i--) {
+            for (i = 0; i > -30; i--) {
             var currentInt = 50 + i
             var ArrStartNum = currentInt - 8
             var divider = 1
@@ -162,7 +164,7 @@ function bigFunction(userInput) {
             
             
             
-            }, 3000)
+            }, 2000)
 
             measureMe(stockPrices8, stockPrices21)
             makeChart(stockLabels, stockPrices8, stockPrices21 , stockRealPriceBucket)
@@ -170,7 +172,62 @@ function bigFunction(userInput) {
 
 
 
-/////// makes the chart ////////
+
+
+             
+
+function makeChart(stockLabels, stockPrices8, stockPrices21, stockRealPriceBucket) {
+   
+
+    setTimeout (function() {
+       
+            var ctx = document.getElementById('stock-chart').getContext('2d');    
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: stockLabels,
+                    datasets: [{
+                        label: "8 MA",
+                        data: stockPrices8,
+                        borderColor: 'blue',
+                        borderWidth: 1
+                    },{
+                        label: "21 MA",
+                        data: stockPrices21,
+                        borderColor: "green",
+                        borderWidth: 1,
+                        
+                    }, {
+                        label: "Stock Price",
+                        data: stockRealPriceBucket,
+                        borderColor: "yellow",
+                        borderWidth: 1,
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: userInput,
+                        fontSize: 32,
+                    },
+                    legend: {
+                        position: "bottom",
+                    },
+                    
+                    scales: {
+                        yAxes: [{
+                            gridLines: {
+                                display: false
+                            }
+                        }]
+                    }
+                },
+            });
+          
+    }, 3000)
+    
+
+}
 
   
     function makeChart(stockLabels, stockPrices8, stockPrices21, stockRealPriceBucket) {
