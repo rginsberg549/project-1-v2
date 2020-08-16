@@ -1,7 +1,51 @@
 
-export function bigFunction(userInput){
+/// button feature ///
 
- var apiKey = "ZY0GHO5HP0KA7RXS"
+var countdown = 0
+
+    $("button").click(function (e) {
+        e.preventDefault()
+    
+            if (countdown < 4) {
+            
+            var stockInput = $("#stockInput").val()
+            var userInput = stockInput
+           
+            bigFunction(userInput)
+          
+             setTimeout(function() {
+                return countdown--
+                }, 18000)
+    
+            return countdown++
+            
+            } else {
+                $("button").prop("disabled", true)
+                $("#stockInput").prop("disabled", true)
+                count()
+            }
+         
+      })
+        
+      function count() {
+      var count = 20
+      timer = setInterval(function () {
+          $("#time-remaining").html("slow down... please wait: " + count).slice(-2)
+          count--;
+          if (count < 0) {
+              clearInterval(timer);
+              $("#time-remaining").text(" ")
+              $("button").prop("disabled", false) 
+              $("#stockInput").prop("disabled", false)
+          }
+      }, 1000)
+      }
+
+function bigFunction(userInput) {
+
+   // buckets //   
+
+    var apiKey = "ZY0GHO5HP0KA7RXS"
     var queryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${userInput}&apikey=${apiKey}`
     var stockLabels = []
     var stockPrices8 = []
@@ -15,12 +59,9 @@ export function bigFunction(userInput){
                     
                     setTimeout (function(){
                     
-                    
                         checkUptrend()
-                        
-                            
+
                             function checkUptrend (){
-                                console.log("test uptrend")
                                     for (var i = 23; i < 31; i++) {
                                         
                                         if (stockPrices8[i] < stockPrices21[i]) {
@@ -39,10 +80,9 @@ export function bigFunction(userInput){
                             }
 
                             function checkdownTrend (){
-                                    console.log("test downtrend")
                                     for (var i = 23; i < 31; i++) {
                                         if (stockPrices8[i] > stockPrices21[i]) {
-                                            $("#trend-text").text("None Detected")
+                                            $("#trend-text").text("No Trend Detected")
                                             $("#trend-text").css({color: "black"})
                                             break;
                                         } else {
@@ -122,7 +162,7 @@ export function bigFunction(userInput){
             
             
             
-            }, 2000)
+            }, 3000)
 
             measureMe(stockPrices8, stockPrices21)
             makeChart(stockLabels, stockPrices8, stockPrices21 , stockRealPriceBucket)
@@ -166,7 +206,7 @@ export function bigFunction(userInput){
                     options: {
                         title: {
                             display: true,
-                            text: userInput,
+                            text: userInput.toUpperCase(),
                             fontSize: 32,
                         },
                         legend: {
@@ -179,11 +219,12 @@ export function bigFunction(userInput){
                                     display: false
                                 }
                             }]
-                        }
+                        },
+                        maintainAspectRatio: false
                     },
                 });
             
-        }, 3500)
+        }, 3000)
         
     }
 

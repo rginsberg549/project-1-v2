@@ -47,26 +47,211 @@ table {
 	border-spacing: 0;
 }
 
+#big-container {
+	text-align: center;
+	height: 600px;
+	
+}
+
 #contain-it {
-	position: relative;
-	max-width: 800px;
+	width: 650px;
 	margin: auto;
-	margin-top: 50px;
+	padding-top: 40px !important;
+	
 }
 
 #stock-chart {
 	width: 100%;
 	height: 100%;
-    border: 1px solid black;
-  
+	border-right: 1px solid rgb(156, 156, 156);
+	border-top: none;
+	flex-basis: auto;
+	
 }
 
-.pure-form {
-	margin-top: 30px;
+#side-by-side {
+	display: flex;
+	flex-flow: row wrap;
+	
+}
+
+#nav-left {
+	margin-left: 10%;
+}
+#nav-right {
+	margin-right: 10%;
+}
+
+#value-card {
+	height: 100%;
+	text-align: left;
+	margin-right: auto;
+	width: 300px;
+	padding: 40px;
+	padding-top: 0px;
+}
+
+
+
+#trend-text-div {
 	text-align: center;
+	padding-top: 20px;
 }
 
 #trend-text {
-	font-size: 26px;
+	
+	font-size: 22px;
+
+}
+
+#nav-brand {
+	margin-left: 50px !important;
+	font-size: 42px;
+	font-family: 'Baloo Tamma 2', cursive;
+}
+
+#submit {
+	margin-right: 20px;
+	border-radius: 5px;
+}
+
+#search-history-div {
+	font-size: 12px;
+	height: 60px;
+	position: relative;
+	margin: center;
+}
+
+#search-history-text {
+	margin-left: 75px;
+	color: darkgray;
+	position: absolute;
+
+}
+
+#headline-text {
+	margin-left: 75px;
+}
+
+#button-wrapper {
+	margin-left: 100px;
+}
+.search-history-button {
+	position: relative;
+	border-radius: 5px;
+	margin-top: 17px;
+	margin-right: 3px;
+	margin-left: 3px;
+}
+
+.clear-search-history {
+	position: absolute;
+	right: 2px;
+	top: -13px;
+	color: lightgray;
+}
+
+.company-info, .company-class {
+	background-color: rgb(226, 225, 225);
+}
+
+.company-info, .company-info-odd {
+	border-bottom: 1px solid rgb(156, 156, 156);
+}
+
+.company-class, .company-class-odd {
+	padding: 0px;
+	border-bottom: 1px solid rgb(156, 156, 156);
+}
+
+
+.uk-card {
+	border: 1px solid rgb(224, 224, 224);
+	text-align: left;
+	padding: 10px;
+	height: 200px;
+	
+}
+
+a {
+	color: rgb(115, 116, 115)
+}
+
+table {
+	border: 1px solid black;
+}
+
+th, td {
+	border-right: 1px solid rgb(156, 156, 156);
+	padding: 5px
+}
+
+#article-wrapper {
+	width: 100%;
+	margin-bottom: 50px;
+}
+
+#article-box {
+	max-width: 900px;
+	margin: auto;
+	
+}
+
+.card-image {
+	background-color: rgb(245, 243, 243);
+}
+
+@media (max-width: 600px) {
+	#contain-it {
+		height: 400px;
+	}
+	
+	#stock-chart {
+		width: 500px !important;
+	}
+	#nav-brand {
+		margin-left: 10px !important;
+	}
+	#search-history-text, #headline-text {
+		margin-left: 10px;
+		margin-top: 0 !important;
+		padding-top: 0 !important;
+
+	}
+
+	#button-wrapper {
+		margin-left: 5px;
+	}
+
+	
+}
+
+@media (max-width: 1029px) {
+	#value-card {
+		margin: auto;
+		padding-top: 15px;
+	
+	}
+	#big-container {
+		height: 1050px;
+	}
+	#stock-chart {
+		border-bottom: 1px solid rgb(156, 156, 156);
+		border-right: none
+	}
+
+	#nav-right, #nav-left {
+		margin: auto;
+	}
+	#article-box {
+		margin: auto;
+		text-align: center;
+		
+	}
+	
+	#article-wrapper {
+		align-content: center;
+	}
+	
 	
 }

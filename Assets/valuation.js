@@ -1,5 +1,5 @@
 var rapidAPIkey = "c08946528f1aa8ab38e951cb961b2d08";
-
+// var rapidAPIkey = "Demo"
 var globalDataObj = [];
 var companyProfileObj = {};
 
@@ -150,18 +150,18 @@ function renderCompanyValuation() {
     setTimeout(function() {
         var tempDate = Object.keys(globalDataObj)[0];
         companyImageElement.attr("src", companyProfileObj.image);
-        companyNameElement.text("Comany Name: " + companyProfileObj.companyName);
+        companyNameElement.text(companyProfileObj.companyName);
         getCompanyArticles(companyProfileObj.companyName);
-        ceoNameElement.text("CEO: " + companyProfileObj.ceo);
-        industryElement.text("Industry: " + companyProfileObj.industry);
-        currentPriceElement.text("Share Price (Now): " + companyProfileObj.price);
-        dateElement.text("Reprted on: " + tempDate);
-        epsElement.text("Earnings Per Share: " + (globalDataObj[tempDate].eps).toFixed(2));
-        dividentElement.text("Dividends: " + (companyProfileObj.dividend).toFixed(2));
-        grossProfitRatioElement.text("Gross Profit Ratio: " + (globalDataObj[tempDate].grossProfitRatio * 100).toFixed(2) + "%")
-        netIncomeRatioElement.text("Net Income Ratio: " + (globalDataObj[tempDate].netIncomeRatio *100).toFixed(2) + "%")
-        totalAssetsElement.text("Total Assets: " + formatter.format(globalDataObj[tempDate].totalAssets));
-        totalDebtElement.text("Total Debt: " + formatter.format(globalDataObj[tempDate].totalDebt));
+        ceoNameElement.text(companyProfileObj.ceo);
+        industryElement.text(companyProfileObj.industry);
+        currentPriceElement.text(companyProfileObj.price);
+        dateElement.text(tempDate);
+        epsElement.text((globalDataObj[tempDate].eps).toFixed(2));
+        dividentElement.text((companyProfileObj.dividend).toFixed(2));
+        grossProfitRatioElement.text((globalDataObj[tempDate].grossProfitRatio * 100).toFixed(2) + "%")
+        netIncomeRatioElement.text((globalDataObj[tempDate].netIncomeRatio *100).toFixed(2) + "%")
+        totalAssetsElement.text(formatter.format(globalDataObj[tempDate].totalAssets));
+        totalDebtElement.text(formatter.format(globalDataObj[tempDate].totalDebt));
     }, 2000);
 }
 

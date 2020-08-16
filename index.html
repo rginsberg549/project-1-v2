@@ -1,56 +1,131 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test test test</title>
-    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+    <title>Quick Trends</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.6/dist/css/uikit.min.css" />
     <link rel="stylesheet" href="Assets/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
 </head>
+
 <body>
-    
-    <div id="contain-it">
-        <canvas id="stock-chart"></canvas>
-    </div>
-    
-    <div>
-        <form class="pure-form">
-            <span id="time-remaining" style="color: red"></span><br><br>
-            <input type="text" class="pure-input-rounded" id="stockInput">
-            <button id="submit" type="submit" class="pure-button">Search</button>
-            <br><br>
-            <span style="font-size: 26px;">8/21 MA Trend:  </span><span id="trend-text"></span>
-        </form>
-    </div>
-
-    <div class="valuation card">
-        <div class="card-image">
-            <img class="company-image">
-        </div>
+    <div class="uk-navbar-container uk-background-default" uk-navbar>
         
-        <p class="company-name">Company Name</p>
-        <p class="ceo-name">CEO Name</p>
-        <p class="industry">Industry</p>
-        <p class="current-price">Current Price</p>
-        <p class="date">Date</p>
-        <p class="eps">EPS</p>
-        <p class="dividends">Dividends</p>
-        <p class="gross-profit-ratio">Gross Profit Ration</p>
-        <p class="net-income-ratio">Net Income Ratio</p>
-        <p class="total-assets">Total Assets</p>
-        <p class="total-debt">Total Debt</p>
+            <div class="uk-navbar-left uk-padding-small" id="nav-left">
+            
+                <div id="nav-brand" class=".uk-text-emphasis">Quick Trends</div>
+            </div>
 
+            <div class="uk-navbar-right uk-padding-small" id="nav-right">
+                <div class="uk-flex-inline">
+                    <input class="uk-search-default" type="text" id="stockInput" minlength="3" maxlength="4">
+                    <button class="uk-button uk-button-default" id="submit" type="submit">Search</button>
+                </div>
+            
     </div>
 
-    <div class="company-articles"></div>
+    </div>
+    <div class="uk-text-small uk-text-muted" id="search-history-div">
+
+        <span id="search-history-text">Recent search history:</span>
+        <div id="button-wrapper">
+            <div class="search-history uk-flex-inline"></div>
+        </div>
+    </div>
+
     
+    <div id="big-container" class="uk-background-muted">
+      <div id="clean-wrapper">
+        <div id="trend-text-div">
+            <span id="trend-text"></span>
+        </div>
+      <div id="side-by-side">
+            <div id="contain-it">
+                <canvas id="stock-chart"></canvas>
+            </div>
+
+            <div class="valuation card" id="value-card">
+                    <div class="card-image2">
+                        <img class="company-image uk-align-center">
+                    </div>
+
+                   
+                    <table>
+                        <tr>
+                          <td class="company-info-odd">Company Name:</td>
+                          <td class="company-name company-class-odd"></td>
+                        </tr>
+                        <tr>
+                          <td class="company-info">CEO Name:</td>
+                          <td class="ceo-name company-class"></td>
+                        </tr>
+                        <tr>
+                            <td class="company-info-odd">Industry:</td>
+                            <td class="industry company-class-odd"></td>
+                          </tr>
+                          <tr>
+                            <td class="company-info">Current Price:</td>
+                            <td class="current-price company-class"></td>
+                          </tr>
+                          <tr>
+                            <td class="company-info-odd">Date:</td>
+                            <td class="date company-class-odd"></td>
+                          </tr>
+                          <tr>
+                            <td class="company-info">EPS:</td>
+                            <td class="eps company-class"></td>
+                          </tr>
+                          <tr>
+                              <td class="company-info-odd">Dividends:</td>
+                              <td class="dividends company-class-odd"></td>
+                            </tr>
+                            <tr>
+                              <td class="company-info">Gross Profit Ration:</td>
+                              <td class="gross-profit-ratio company-class"></td> 
+                            </tr>
+                            <tr>
+                                <td class="company-info-odd">Net Income Ratio:</td>
+                                <td class="net-income-ratio company-class-odd"></td>
+                              </tr>
+                              <tr>
+                                  <td class="company-info">Total Assets:</td>
+                                  <td class="total-assets company-class"></td>
+                                </tr>
+                                <tr>
+                                  <td class="company-info-odd">Total Debt:</td>
+                                  <td class="total-debt company-class-odd"></td> 
+                      </table>
+            </div>
+     </div>  
+
+
+    </div>
+    </div>
+
+    <div class="uk-text-muted uk-text-small" id="headline-text">Recent news:</div>
+    <br>
+    <div id="article-wrapper" class="uk-background-muted">
+        <div id="article-box">
+        <div class="company-articles uk-flex uk-flex-wrap uk-flex-center">
+           
+        </div>
+        </div>
+    </div>
+
+    
+
+
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.6/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.6/dist/js/uikit-icons.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="Assets/searchHistory.js"></script>
     <script src="Assets/valuation.js"></script>
     <script src="Assets/newsfeed.js"></script>
     <script src="Assets/trend-chart.js"></script>
-    <script type="module" src="Assets/script.js"></script>
 </body>
-</html> 
+
+</html>

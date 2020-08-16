@@ -25,13 +25,12 @@ function getCompanyArticles(q) {
         var articleData = (response.response.docs)
         setTimeout(function() {
             companyArticlesElement.empty();
-;            for (let index = 0; index < articleData.length; index++) {
+;            for (let index = 0; index < articleData.length -1; index++) {
                 var articleDiv = $("<div>");
                 
                 var cardImgDiv = $("<div>");
                 cardImgDiv.attr("class", "card-image");
-
-                articleDiv.attr("class", "card");
+                articleDiv.addClass("uk-card uk-card-body uk-width-medium uk-height-medium uk-background-muted uk-overflow-hidden uk-card-hover")
 
                 var articleLink = $("<a>");
 
@@ -51,9 +50,11 @@ function getCompanyArticles(q) {
                 articleDiv.append([cardImgDiv, articleLink]);
                 companyArticlesElement.append(articleDiv);
             }
-        }, 2000)
+        }, 3000)
     });
 }
+
+
 
 
 
