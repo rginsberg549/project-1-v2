@@ -1,5 +1,5 @@
 
-/// button feature ///
+var stockChartElement = $("#stock-chart");
 
 var countdown = 0
 
@@ -77,16 +77,15 @@ queryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=
                                     }    
                             }
                             function uptrendLoaded() {
-                                
+                                $("#trend-text").attr("class", "uk-badge uptrend");
                                 $("#trend-text").text("Uptrend Detected")
-                                $("#trend-text").css({color: "green"})
                             }
 
                             function checkdownTrend (){
                                     for (var i = 23; i < 31; i++) {
                                         if (stockPrices8[i] > stockPrices21[i]) {
+                                            $("#trend-text").attr("class", "uk-badge no-trend");
                                             $("#trend-text").text("No Trend Detected")
-                                            $("#trend-text").css({color: "black"})
                                             break;
                                         } else {
                                             downtrendLoaded()
@@ -95,8 +94,8 @@ queryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=
                             }    
 
                                 function downtrendLoaded() {
+                                    $("#trend-text").attr("class", "uk-badge downtrend");
                                     $("#trend-text").text("Downtrend Detected")
-                                    $("#trend-text").css({color: "red"})
                                 }
 
                     }, 3000)
@@ -176,7 +175,8 @@ queryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=
              
 
 function makeChart(stockLabels, stockPrices8, stockPrices21, stockRealPriceBucket) {
-   
+
+    stockChartElement.empty()
 
     setTimeout (function() {
        
@@ -230,10 +230,9 @@ function makeChart(stockLabels, stockPrices8, stockPrices21, stockRealPriceBucke
 
   
     function makeChart(stockLabels, stockPrices8, stockPrices21, stockRealPriceBucket) {
-        
-        $("#stock-chart").remove()
-        $("#contain-it").append(`<canvas id="stock-chart"></canvas>`)
 
+        stockChartElement.empty()
+        
         setTimeout (function() {
         
                 var ctx = document.getElementById('stock-chart').getContext('2d');    
