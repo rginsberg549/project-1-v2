@@ -34,11 +34,12 @@ function getCompanyArticles(q) {
 
                 var articleListImage = $("<img>");
                 
-                var articleListAbstract = $("<div>");
+                var articleListAbstract = $("<a>");
                 articleListAbstract.text(articleData[index].abstract);
 
                 if (articleData[index].multimedia[7] != null) {
                     articleListImage.attr("src", "https://www.nytimes.com/" + articleData[index].multimedia[7].url);
+                    articleListImage.attr("class", "article-image");
                     articleListItem.append(articleListImage);
                     articleListItem.append([articleListImage, articleListAbstract]);
                     companyArticlesElement.append(articleListItem)

@@ -38,5 +38,9 @@ li {
 
 #newsfeed {
 	margin: 25px;
+}
 
+.article-image {
+	padding-bottom: 10px;
+	min-height: 125px;;
 }
