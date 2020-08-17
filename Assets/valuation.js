@@ -5,6 +5,8 @@ var companyProfileObj = {};
 var input = $("#stockInput");
 var submit = $("#submit");
 
+var companyCardElement = $("#company-card");
+
 var companyProfileElement = $("valuation");
 var companyImageElement = $(".company-image");
 var companyNameElement = $(".company-name");
@@ -14,7 +16,7 @@ var currentPriceElement = $(".current-price");
 
 var dateElement = $(".date");
 var epsElement = $(".eps");
-var dividentElement = $(".dividends");
+var dividendElement = $(".dividends");
 var grossProfitRatioElement = $(".gross-profit-ratio");
 var netIncomeRatioElement = $(".net-income-ratio");
 var totalAssetsElement = $(".total-assets");
@@ -147,21 +149,19 @@ function renderCompanyValuation() {
 
 
     setTimeout(function() { 
-        $("#headline-text").text("Headline News")
         var tempDate = Object.keys(globalDataObj)[0];
         companyImageElement.attr("src", companyProfileObj.image);
         companyNameElement.text(companyProfileObj.companyName);
         getCompanyArticles(companyProfileObj.companyName);
-        ceoNameElement.text(companyProfileObj.ceo);
-        industryElement.text(companyProfileObj.industry);
-        currentPriceElement.text(companyProfileObj.price);
+        ceoNameElement.text("CEO: " + companyProfileObj.ceo);
+        industryElement.text("Industry: " + companyProfileObj.industry);
+        currentPriceElement.text("Stock Price: " + companyProfileObj.price);
         dateElement.text(tempDate);
-        epsElement.text((globalDataObj[tempDate].eps).toFixed(2));
-        dividentElement.text((companyProfileObj.dividend).toFixed(2));
-        grossProfitRatioElement.text((globalDataObj[tempDate].grossProfitRatio * 100).toFixed(2) + "%")
-        netIncomeRatioElement.text((globalDataObj[tempDate].netIncomeRatio *100).toFixed(2) + "%")
-        totalAssetsElement.text(formatter.format(globalDataObj[tempDate].totalAssets));
-        totalDebtElement.text(formatter.format(globalDataObj[tempDate].totalDebt));
+        epsElement.text("EPS: " + (globalDataObj[tempDate].eps).toFixed(2));
+        dividendElement.text("Last Dividend: " + (companyProfileObj.dividend).toFixed(2));
+        grossProfitRatioElement.text("Gross Profit: " + (globalDataObj[tempDate].grossProfitRatio * 100).toFixed(2) + "%");
+        netIncomeRatioElement.text("Net Income: " + (globalDataObj[tempDate].netIncomeRatio *100).toFixed(2) + "%");
+        companyCardElement.removeClass("hide");
     }, 2000);
 }
 

@@ -1,5 +1,6 @@
 var nytAPIKey = "&api-key=iabwIkv6ykHl3BTclLtwozsw8QZXDrxl";
-var companyArticlesElement = $(".company-articles");
+var companyArticlesElement = $("#company-article-list");
+var newsfeedSectionElement = $("#newsfeed");
 
 
 function getArticleSearchSettings(q) {
@@ -21,39 +22,37 @@ function clearCompanyArticles() {
 }
 
 function getCompanyArticles(q) {
-        $.ajax(getArticleSearchSettings(q)).done(function(response) {
-         var articleData = (response.response.docs)
+    companyArticlesElement.empty();
+    var sectionTitle = $(".newsfeed-section-title")
+    sectionTitle.text("Recent News");
+    $.ajax(getArticleSearchSettings(q)).done(function(response) {
+        var articleData = (response.response.docs)
+        console.log(articleData);
         setTimeout(function() {
-           
-            companyArticlesElement.empty();
-;            for (let index = 0; index < articleData.length -1; index++) {
-                var articleDiv = $("<div>");
+            for (let index = 0; index < articleData.length -1; index++) {
+                var articleListItem = $("<li>");
+
+                var articleListImage = $("<img>");
                 
-                var cardImgDiv = $("<div>");
-                cardImgDiv.attr("class", "card-image");
-                articleDiv.addClass("uk-card uk-card-body uk-width-medium uk-height-medium uk-background-muted uk-overflow-hidden uk-card-hover")
+                var articleListAbstract = $("<div>");
+                articleListAbstract.text(articleData[index].abstract);
 
-                var articleLink = $("<a>");
-
-                var articleImage = $("<img>");
-
-
-                articleLink.attr("href", articleData[index].web_url);
-                articleLink.text(articleData[index].abstract);
-
-                if (articleData[index].multimedia[17] != null) {
-                    articleImage.attr("src", "https://www.nytimes.com/" + articleData[index].multimedia[17].url);
-                    cardImgDiv.append(articleImage);
+                if (articleData[index].multimedia[7] != null) {
+                    articleListImage.attr("src", "https://www.nytimes.com/" + articleData[index].multimedia[7].url);
+                    articleListItem.append(articleListImage);
+                    articleListItem.append([articleListImage, articleListAbstract]);
+                    companyArticlesElement.append(articleListItem)
                 } else {
-                    articleImage.attr("src", "");
-                    cardImgDiv.append(articleImage);
-            }
-                articleDiv.append([cardImgDiv, articleLink]);
-                companyArticlesElement.append(articleDiv);
+                    continue
+                }
             }
         }, 3000)
     });
 }
+
+
+
+
 
 
 
