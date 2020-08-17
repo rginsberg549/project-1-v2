@@ -146,7 +146,8 @@ function renderCompanyValuation() {
     
 
 
-    setTimeout(function() {
+    setTimeout(function() { 
+        $("#headline-text").text("Headline News")
         var tempDate = Object.keys(globalDataObj)[0];
         companyImageElement.attr("src", companyProfileObj.image);
         companyNameElement.text(companyProfileObj.companyName);

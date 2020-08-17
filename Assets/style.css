@@ -131,7 +131,11 @@ table {
 }
 
 #headline-text {
-	margin-left: 75px;
+	text-align: center;
+	font-size: 24px;
+	display: block;
+	text-decoration: underline;
+	
 }
 
 #button-wrapper {
@@ -207,9 +211,6 @@ th, td {
 	margin: auto;
 }
 
-/* .wrapper-top {
-	margin: auto;
-} */
 
 @media (max-width: 600px) {
 	#contain-it {

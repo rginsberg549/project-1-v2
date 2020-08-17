@@ -12,7 +12,9 @@ var countdown = 0
             var userInput = stockInput
            
             bigFunction(userInput)
-          
+            
+            
+
              setTimeout(function() {
                 return countdown--
                 }, 18000)
@@ -42,9 +44,6 @@ var countdown = 0
       }
 
 function bigFunction(userInput) {
-
-console.log(userInput)
-
 
 apiKey = "ZY0GHO5HP0KA7RXS"
 queryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${userInput}&apikey=${apiKey}`

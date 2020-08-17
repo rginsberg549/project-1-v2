@@ -6,7 +6,7 @@ function getArticleSearchSettings(q) {
     console.log("1: " + q);
     var query = "&q=" + q
     console.log("query value: " + query);
-    
+     
     var articleSearchSettings = {
         "url": "https://api.nytimes.com/svc/search/v2/articlesearch.json?" + query + nytAPIKey,
         "method": "GET",
@@ -21,9 +21,10 @@ function clearCompanyArticles() {
 }
 
 function getCompanyArticles(q) {
-    $.ajax(getArticleSearchSettings(q)).done(function(response) {
-        var articleData = (response.response.docs)
+        $.ajax(getArticleSearchSettings(q)).done(function(response) {
+         var articleData = (response.response.docs)
         setTimeout(function() {
+           
             companyArticlesElement.empty();
 ;            for (let index = 0; index < articleData.length -1; index++) {
                 var articleDiv = $("<div>");

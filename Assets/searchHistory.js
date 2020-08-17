@@ -82,7 +82,6 @@ function createSearchHistoryButtonFromStorage(data) {
 
 
 function getSearchHistoryButtonValue() {
-    console.log($(this));
 
     var historyButtonValue = $(this).val();
     inputElement.val(historyButtonValue);
