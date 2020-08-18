@@ -6,10 +6,12 @@ li {
 	max-width: 175px;;
 }
 
-#stock-chart {
-	min-height:300px;
-	height: 100%;
-	width: 100%;
+#myChart {
+	min-height:400px;
+	min-width: 400px;
+	max-height: 800px;
+	max-width: 800px;
+	margin: auto;
 }
 
 #trend-text {
@@ -37,10 +39,17 @@ li {
 }
 
 #newsfeed {
-	margin: 25px;
+	margin: 50px;
 }
 
 .article-image {
 	padding-bottom: 10px;
 	min-height: 125px;;
+}
+
+#company-card {
+	min-width: 500px;
+	max-width: 800px;
+	margin: auto;
+	height: 100%;
 }

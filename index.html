@@ -17,6 +17,7 @@
     <div class="uk-navbar-item">
       <input id="stockInput" class="uk-input uk-form-width-small" type="text" placeholder="ex. AAPL,MSFT">
       <button id="submit" class="uk-button uk-button-default uk-form-width-xsmall">Search</button>
+      <span id="time-remaining"></span>
     </div>
     <div class="uk-navbar-item">
       <span>Search History:</span>
@@ -24,8 +25,8 @@
     </div>
   </nav>
 
-  <section id="company-card-section">
-    <div id="company-card" class="uk-card uk-card-default hide">
+  <section id="company-card-section" class="uk-flex-center">
+    <div id="company-card" class="uk-card uk-card-default .uk-flex-center hide">
       <div class="uk-card-header">
         <div class="uk-grid-small uk-flex-middle" uk-grid>
           <div class="uk-width-auto">
@@ -49,9 +50,6 @@
 </section>
 
 <section id="stock-chart-section">
-  <div>
-    <canvas id="stock-chart"></canvas>
-  </div>
 </section>
 
 <section id="newsfeed" class="newsfeed uk-dark">

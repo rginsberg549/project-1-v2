@@ -1,4 +1,4 @@
-In this project we were given the follow instructions: create an application that uses two server-side APIs, a CSS framework other than Bootstrap, Must be interactive (i.e: accept and respond to user input), Use at least one new third-party API, Must have a polished UI, Must meet good quality coding standards, Does not use alerts, confirms or prompts (look into _modals_), Must be deployed to GitHub Pages.
+In this project we were given the following instructions: create an application that uses two server-side APIs, a CSS framework other than Bootstrap, Must be interactive (i.e: accept and respond to user input), Use at least one new third-party API, Must have a polished UI, Must meet good quality coding standards, Does not use alerts, confirms or prompts (look into _modals_), Must be deployed to GitHub Pages.
 
 User Story(s):
 As a user, I want to receive stock trends on the webUI
