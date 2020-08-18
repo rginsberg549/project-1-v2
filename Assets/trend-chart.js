@@ -1,5 +1,5 @@
 
-var stockChartElement = $("#stock-chart");
+var stockChartSectionElement = $("#stock-chart-section");
 
 var countdown = 0
 
@@ -168,17 +168,10 @@ queryUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=
             makeChart(stockLabels, stockPrices8, stockPrices21 , stockRealPriceBucket)
         }
 
-
-
-
-
-             
-
 function makeChart(stockLabels, stockPrices8, stockPrices21, stockRealPriceBucket) {
 
-    stockChartElement.empty()
-
     setTimeout (function() {
+        
        
             var ctx = document.getElementById('stock-chart').getContext('2d');    
             var myChart = new Chart(ctx, {
@@ -228,14 +221,17 @@ function makeChart(stockLabels, stockPrices8, stockPrices21, stockRealPriceBucke
 
 }
 
-  
     function makeChart(stockLabels, stockPrices8, stockPrices21, stockRealPriceBucket) {
 
-        stockChartElement.empty()
+        stockChartSectionElement.empty();
+        var canvasElement = $("<canvas>");
+        canvasElement.attr("id", "myChart");
+        stockChartSectionElement.append(canvasElement);
+
         
         setTimeout (function() {
-        
-                var ctx = document.getElementById('stock-chart').getContext('2d');    
+
+                var ctx = document.getElementById('myChart').getContext('2d');    
                 var myChart = new Chart(ctx, {
                     type: 'line',
                     data: {

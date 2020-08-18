@@ -156,7 +156,7 @@ function renderCompanyValuation() {
         ceoNameElement.text("CEO: " + companyProfileObj.ceo);
         industryElement.text("Industry: " + companyProfileObj.industry);
         currentPriceElement.text("Stock Price: " + companyProfileObj.price);
-        dateElement.text(tempDate);
+        dateElement.text("Last Filing Date: " + tempDate);
         epsElement.text("EPS: " + (globalDataObj[tempDate].eps).toFixed(2));
         dividendElement.text("Last Dividend: " + (companyProfileObj.dividend).toFixed(2));
         grossProfitRatioElement.text("Gross Profit: " + (globalDataObj[tempDate].grossProfitRatio * 100).toFixed(2) + "%");

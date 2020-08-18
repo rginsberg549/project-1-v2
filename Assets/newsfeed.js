@@ -4,16 +4,12 @@ var newsfeedSectionElement = $("#newsfeed");
 
 
 function getArticleSearchSettings(q) {
-    console.log("1: " + q);
     var query = "&q=" + q
-    console.log("query value: " + query);
      
     var articleSearchSettings = {
         "url": "https://api.nytimes.com/svc/search/v2/articlesearch.json?" + query + nytAPIKey,
         "method": "GET",
     }
-
-    console.log("Article Search Settings: " + articleSearchSettings);
     return articleSearchSettings
 }
 
@@ -27,7 +23,6 @@ function getCompanyArticles(q) {
     sectionTitle.text("Recent News");
     $.ajax(getArticleSearchSettings(q)).done(function(response) {
         var articleData = (response.response.docs)
-        console.log(articleData);
         setTimeout(function() {
             for (let index = 0; index < articleData.length -1; index++) {
                 var articleListItem = $("<li>");
