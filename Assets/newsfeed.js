@@ -1,5 +1,6 @@
 var nytAPIKey = "&api-key=iabwIkv6ykHl3BTclLtwozsw8QZXDrxl";
 var companyArticlesElement = $("#company-article-list");
+var sectionTitle = $(".newsfeed-section-title");
 var newsfeedSectionElement = $("#newsfeed");
 
 
@@ -19,8 +20,6 @@ function clearCompanyArticles() {
 
 function getCompanyArticles(q) {
     companyArticlesElement.empty();
-    var sectionTitle = $(".newsfeed-section-title")
-    sectionTitle.text("Recent News");
     $.ajax(getArticleSearchSettings(q)).done(function(response) {
         var articleData = (response.response.docs)
         setTimeout(function() {
@@ -37,6 +36,7 @@ function getCompanyArticles(q) {
                     articleListImage.attr("class", "article-image");
                     articleListItem.append(articleListImage);
                     articleListItem.append([articleListImage, articleListAbstract]);
+                    sectionTitle.text("Recent News");
                     companyArticlesElement.append(articleListItem)
                 } else {
                     continue

@@ -7,7 +7,7 @@ li {
 }
 
 #myChart {
-	min-height:400px;
+	min-height:350px;
 	min-width: 400px;
 	max-height: 800px;
 	max-width: 800px;
@@ -48,8 +48,11 @@ li {
 }
 
 #company-card {
-	min-width: 500px;
-	max-width: 800px;
-	margin: auto;
-	height: 100%;
+	text-align: center;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+a {
+	color: #666;
 }
